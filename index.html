@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Unified Video Action Model.">
+  <meta name="keywords" content="Robotics, Video Generation, Video Action, Video Policy">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unified Video Action Model</title>
+
+  
+  <style>
+    /* Only hide videos with the "toggle-video" class */
+    video.toggle-video {
+      width: 100%;
+      height: auto;
+      display: none;
+    }
+    .center-container {
+      width: 100%;
+      text-align: center; /* Centers inline elements within this container */
+      margin-top: 50px; /* Optional: Adds space from the top */
+    }
+    /* Optional styling for the select element */
+    .center-container select {
+      font-size: 16px;
+      padding: 8px;
+    }
+    /* Style the select element (acting as a button) */
+    #videoSelect {
+      border: 2px solid black;
+      background-color: black; /* sets the background color */
+      text-align: center;
+      color: white; /* sets the text color */
+      width: 190px;         /* adjust width as needed */
+      height: 40px;         /* adjust height as needed */
+      padding: 5px;         /* optional: adjust padding for better appearance */
+    }
+  </style>
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/stanford_icon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body style="background-color: black;">
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu" style="background-color: black;">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://shuangli59.github.io/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero" >
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title" style="color: white;">Unified Video Action Model</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block" style="color: white;">
+              <a href="https://shuangli59.github.io/">Shuang Li</a>,</span>
+            <span class="author-block" style="color: white;">
+              <a href="https://yihuai-gao.github.io/">Yihuai Gao</a>,
+            </span>
+            <span class="author-block" style="color: white;">
+              <a href="https://dorsa.fyi/">Dorsa Sadigh</a>,
+            </span>
+            <span class="author-block" style="color: white;">
+              <a href="https://shurans.github.io/">Shuran Song</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block" style="color: white;">Stanford University</span>
+          </div>
+    
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="./static/uva_paper.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/ShuangLI59/unified_video_action_model"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/0teaser.mp4"
+                type="video/mp4">
+      </video>
+      
+      <h2 class="subtitle has-text-centered" style="color: white;">
+        <span class="dnerf">Unified Video Action</span> is the first model to integrate video generation with <span class="dnerf">Real-Time</span> policy inference.
+      </h2>
+
+      <!-- <h2 class="subtitle" style="color: white;">
+        The UVA model is the first to integrate video generation with real-time policy inference.
+      </h2> -->
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" style="color: white;">How?</h2>
+
+        <div class="content has-text-justified">
+          <p style="color: white;">
+            <b>Joint Video-Action Optimization</b> -- learns a unified latent space for both video and action generation.
+          </p>
+          <p style="color: white;">
+            <b>Decoupled Video-Action Decoding</b> -- speeds up policy inference by skipping video generation.
+          </p>
+          <p style="color: white;">
+            <b>Masked Training</b> -- enables a single model to handle diverse tasks while reducing overfitting.
+          </p>
+        </div>
+
+        <video id="dollyzoom" controls loop playsinline height="100%" style="border: 2px solid gray;">
+          <source src="./static/videos/0intro.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    
+    
+    <br/><br/>
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" style="color: white;">Policy Results</h2>
+
+        <!-- Interpolating. -->
+        <h3 class="title is-4" style="color: white;">Real-world Multi-task</h3>
+        <div class="content has-text-justified" style="color: white;">
+          <p>
+            For fair comparisons between methods, all training data are from public datasets and no additional data are used. All evaluation experiments are out-of-distribution.
+          </p>
+        </div>
+        
+        <video id="dollyzoom" autoplay muted loop playsinline height="100%" style="border: 2px solid gray;">
+          <source src="./static/videos/1dataset.mp4"
+                  type="video/mp4">
+        </video>
+
+        <br/><br/>
+
+        <div class="content has-text-justified" style="color: white;">
+          <p>
+            All evaluations are unseen during training, including unseen environments, objects, backgrounds, and robot grippers.
+          </p>
+        </div>
+
+        <video id="dollyzoom" autoplay muted loop playsinline height="100%" style="border: 2px solid gray;">
+          <source src="./static/videos/2test_settings.mp4"
+                  type="video/mp4">
+        </video>
+
+        <br/><br/>
+
+        <div class="content has-text-justified" style="color: white;">
+          <p>
+            We compare UVA with the state-of-the-art policy model, Diffusion Policy with a pretrained vision encoder released by UMI (DP-UMI). UVA outperforms DP-UMI in multi-task settings.
+          </p>
+        </div>
+
+
+        <!-- ############################################################################################################# -->
+
+<!--         
+        <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/3uva_cup.mp4"
+                  type="video/mp4">
+        </video>
+        
+        <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/3uva_mouse.mp4"
+                  type="video/mp4">
+        </video>
+
+        <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/3uva_towel.mp4"
+                  type="video/mp4">
+        </video> -->
+        
+        
+        <!-- ############################################################################################################# -->
+        
+        <div class="center-container">
+          <label for="videoSelect" style="color: white;">Choose a task:</label>
+          <select id="videoSelect" style="border: 2px solid gray;">
+            <option value="video1">Cup Arrangement</option>
+            <option value="video2">Mouse Arrangement</option>
+            <option value="video3">Towel Folding</option>
+          </select>
+        </div>
+        <br/>
+        <!-- Videos to be toggled have the "toggle-video" class -->
+        <video id="video1" class="toggle-video" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/3uva_cup.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        
+        <video id="video2" class="toggle-video" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/3uva_mouse.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        
+        <video id="video3" class="toggle-video" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/3uva_towel.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <!-- Other video elements that should remain visible can be added here without the "toggle-video" class -->
+
+        <script>
+          const videoSelect = document.getElementById('videoSelect');
+          // Only select videos that should be toggled
+          const toggleVideos = document.querySelectorAll('.toggle-video');
+          
+          // Show the default video based on the dropdown's default value
+          document.getElementById(videoSelect.value).style.display = 'block';
+          
+          videoSelect.addEventListener('change', () => {
+            // Hide all toggle videos
+            toggleVideos.forEach(video => video.style.display = 'none');
+            // Display the selected video
+            const selectedVideo = document.getElementById(videoSelect.value);
+            if (selectedVideo) {
+              selectedVideo.style.display = 'block';
+            }
+          });
+        </script>
+        <!-- ############################################################################################################# -->
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <br/><br/>
+        
+        
+        <h3 class="title is-4" style="color: white;">How Much Can Video Generation Boost Policy Learning?</h3>
+        <div class="content has-text-justified" style="color: white;">
+          <p>
+            Using video generation as an additional supervision during training can significantly boost policy inference performance, without slowing down policy inference speed.
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <img src="./static/images/4video_act_compare.png" alt="Dataset" style="width: 100%; height: 100%;">
+        </div>
+        
+
+      </div>
+    </div>
+    <!--/ Animation. -->
+
+
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" style="color: white;">Video Generation Results</h2>
+
+        <div class="content has-text-justified">
+          <p style="color: white;">
+            Results on validation set. UVA generates high-quality videos that closely match the ground truth.
+            In contrast, UniPi occasionally produces blurry or mismatched images and may fail to generate some objects (Libero10: the second moka pot). 
+            In our experiments, we predict 4 future video frames. However, the UVA framework can also be extended for longer video predictions with more compute resources.
+          </p>
+        </div>
+
+        <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/5video2.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" style="color: white;">Forward Dynamics Results</h2>
+
+        <div class="content has-text-justified">
+          <p style="color: white;">
+            Our model can perform forward dynamics predictions to generate future observations based on action inputs. 
+            We use it to predict future observations to guide the behavior of a pretrained policy model, such as the Diffusion Policy (DP). 
+            During training, the robot pushes two blocks randomly to any target. 
+            During testing, the generated future image from UVA is used to select the proper action that moves a specific object to a specific target.
+          </p>
+        </div>
+
+        <div class="content has-text-centered">
+          <img src="./static/images/8forward_dynmic_env.png" alt="Dataset" style="width: 100%; height: 100%;">
+        </div>
+
+        
+        <div class="content has-text-justified">
+          <p style="color: white;">
+            DP alone achieves an 38% average success rate, while incorporating our model to generate future observations for trajectory selection increases the success rate to 60%. 
+            Using a ground-truth simulator provides an upper bound success rate of 75%.
+          </p>
+        </div>
+
+        <div class="content has-text-centered">
+          <img src="./static/images/7forward_dynamic.png" alt="Dataset" style="width: 100%; height: 100%;">
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" style="color: white;">Inverse Dynamics Results</h2>
+
+        <div class="content has-text-justified">
+          <p style="color: white;">
+            Our model can be used for inverse dynamics predictions on unseen data. 
+            Given observations, UVA can predict the actions that cause the visual changes. 
+            ORB-SLAM3 is a well-engineered SLAM system used in <a href="https://umi-gripper.github.io/">UMI</a>. 
+            While SLAM achieves the best accuracy, it requires careful calibration and map-building. 
+          </p>
+        </div>
+
+        <div class="content has-text-centered">
+          <img src="./static/images/9inverse_dynamic.png" alt="Dataset" style="width: 100%; height: 100%;">
+        </div>
+      </div>
+    </div>
+
+
+
+    
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" style="color: white;">Model Architecture</h2>
+
+        <video id="dollyzoom" controls loop playsinline height="100%" style="border: 2px solid gray;">
+          <source src="./static/videos/6model_architecture.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+
+
+    <br/>
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" style="color: white;">Questions & Answers</h2>
+
+        <div class="content has-text-justified">
+          <p style="color: white;">
+            <b>Are there any tips for training UVA?</b>
+          </p>
+          <p style="color: white;">
+            We found that two-stage training works better than training on both video and action tasks simultaneously. 
+            In the first stage, the model is trained on video generation, and in the second stage, it is fine-tuned on both video and action tasks.
+          </p>
+          
+          
+          <p style="color: white;">
+            <b>How long does it take to train UVA? </b>
+          </p>
+          <p style="color: white;">
+            Training time depends on both the size of the dataset and the complexity of the task. For the UMI task, we sampled 500 trajectories from each of the three datasets and trained the model using 8 H100 GPUs. The video generation task was trained for 2 days, while the joint video and action generation requires an additional 2 days.
+          </p>
+
+          <p style="color: white;">
+            <b>What's the next step for UVA? </b>
+          </p>
+          <p style="color: white;">
+            <b>We believe there is still significant potential in UVA that remains unexplored, and we leave this for future work.</b>
+          </p>
+          <p style="color: white;">
+          <b>Additional video data:</b> UVA can leverage large amounts of actionless video data, which could provide valuable additional supervision. We plan to pretrain UVA on additional video data in the future.
+          </p>
+          <p style="color: white;">
+            <b>Multi-modality:</b> UVA can be naturally extended to predict modalities beyond video and action, such as sound and force, by incorporating additional diffusion heads, offering a more comprehensive and versatile framework.
+          </p>
+          <p style="color: white;">
+            <b>Better architecture:</b> The model architecture can be futuer improved by replacing the diffusion heads with flow matching.
+          </p>          
+          <p style="color: white;">
+            <b>Larger model size:</b> UVA's performance may currently be limited by the model size. We plan to explore larger models in the future.
+          </p>          
+        </div>
+      </div>
+    </div>
+
+    <br/>
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" style="color: white;">Acknowledgement</h2>
+
+        <p style="color: white;">
+          The authors would like to thank Huy Ha for his valuable advice on video recording and website design. 
+          We also thank Amber Xie, Austin Patel, Jennifer Grannen, Vincent de Bakker, John So, Max Du, and Vidhi Jain for their important feedbacks on the paper draft. 
+          We are grateful to Mengda Xu, Suneel Belkhale, Xiaomeng Xu, Fanqi Lin, Lirui Wang, and Tianhong Li for helpful discussions.
+          We would like to express our gratitude to Chi Cheng, Zhenjia Xu, Chuer Pan, Zeyi Liu, Huy Ha, Fanqi Lin, Yingdong Hu, and Zhaxizhuoma for their contributions to the shared UMI dataset.
+          Finally, we want to thank everyone who contributed their computing resources to help us train the models.
+        </p>
+
+        <br/>
+
+        <p style="color: white;">
+          This work was supported in part by the Toyota Research Institute, NSF Award #1941722, #2143601, #2037101, #2132519, ONR Project #N00014-22-1-2293 and the DARPA TIMAT project. 
+          The views and conclusions contained herein are those of the authors and should not be interpreted as necessarily representing the official policies, either expressed or implied, of the sponsors.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section" id="team">
+  <div class="container is-max-desktop content">
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" style="color: white;">Team</h2>
+
+        <div class="container has-text-centered">
+          <div class="publication-authors is-flex justify-content is-justify-content-space-around is-hidden-mobile">
+            <div class="author-block has-text-centered has-addons-centered">
+              <figure class="image is-128x128">
+                <a href="https://shuangli59.github.io/">
+                  <img class="is-rounded" src="./static/images/shuang.jpeg" alt="Shuang Li">
+                </a>
+              </figure>
+              <a href="https://shuangli59.github.io/">Shuang Li</a>
+            </div>
+            <div class="author-block has-text-centered has-addons-centered">
+              <figure class="image is-128x128">
+                <a href="https://yihuai-gao.github.io/">
+                  <img class="is-rounded
+                          " src="./static/images/yihuai.png" alt="Yihuai Gao">
+                </a>
+              </figure>
+              <a href="https://yihuai-gao.github.io/">Yihuai Gao</a>
+            </div>
+            
+
+            <div class="author-block has-text-centered has-addons-centered">
+              <figure class="image is-128x128">
+                <a href="https://dorsa.fyi/">
+                  <img class="is-rounded
+                          " src="./static/images/dorsasadigh.jpeg" alt="Dorsa Sadigh">
+                </a>
+              </figure>
+              <a href="https://dorsa.fyi/">Dorsa Sadigh</a>
+            </div>
+
+
+            <div class="author-block has-text-centered has-addons-centered">
+              <figure class="image is-128x128">
+                <a href="https://shurans.github.io/">
+                  <img class="is-rounded
+                          " src="./static/images/shuran.jpg" alt="Shuran Song">
+                </a>
+              </figure>
+              <a href="https://shurans.github.io/">Shuran Song</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title" style="color: white;">BibTeX</h2>
+    <pre class="is-hidden-mobile" style="background-color: black; color: white; border: 2px solid gray;"><code>@inproceedings{li2025uva,
+      title={Unified Video Action Model},
+      author={Shuang Li and Yihuai Gao and Dorsa Sadigh and Shuran Song},
+      year={2025},
+      booktitle={arxiv},
+    }</code>
+    </pre>
+  </div>
+</section>
+
+
+<footer class="footer" style="background-color: darkgray;">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/uva_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/ShuangLI59/unified_video_action_model" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Website template modified from <a href="https://nerfies.github.io/">NeRFies</a>.
+          </p>
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
