@@ -4,11 +4,11 @@ This is the repository that contains source code for the [UVA website](https://u
 
 If you find UVA useful for your work please cite:
 ```
-@article{li2025uva
-  author    = {Shuang Li and Yihuai Gao and Dorsa Sadigh and Shuran Song},
-  title     = {Unified Video Action},
-  journal   = {arxiv},
-  year      = {2025},
+@article{li2025unified,
+  title={Unified Video Action Model},
+  author={Li, Shuang and Gao, Yihuai and Sadigh, Dorsa and Song, Shuran},
+  journal={arXiv preprint arXiv:2503.00200},
+  year={2025}
 }
 ```
 
